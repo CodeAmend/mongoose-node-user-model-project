@@ -32,4 +32,13 @@ describe("Updating records", () => {
       joe.update({name: 'alex'}), done);
   });
 
+  it("can update postCount by increment", (done) => {
+    User.update({name: "Joe"}, { $inc: { postCount: 5 }})
+      .then( () => User.findOne({name: "Joe"}))
+      .then( (user) => {
+        assert(user.postCount === 5);
+        done();
+      });
+  });
+
 });
