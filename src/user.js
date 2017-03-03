@@ -4,7 +4,10 @@ mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 const UserSchema = Schema({
-  name: String,
+  name: {
+    type:String,
+    required: [true, "User name required."]
+  },
   postCount: Number
 });
 
