@@ -17,4 +17,13 @@ describe("Validating records", () => {
     assert(message === "User name must be longer than 2 characters.");
   });
 
+  it("should return validation promise for improper save", (done) => {
+    const user = new User({name: undefined});
+    user.save()
+      .catch( (validationResult) => {
+        const {message} = validationResult.errors.name;
+        assert(message === "User name must be longer than 2 characters.")
+        done();
+      });
+  });
 });
