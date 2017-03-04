@@ -9,8 +9,7 @@ describe("Creating records", () => {
     joe.save()
       .then( () => {
         assert(!joe.isNew);
-        done()
+        done();
       });
-    // assert(joe.isNew === false);
   });
 });

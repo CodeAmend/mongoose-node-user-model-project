@@ -4,8 +4,10 @@ const User = require('../src/user');
 
 describe("Reading users out of the database", () => {
 
+  let joe;
+
   beforeEach( (done) => {
-    joe = new User({name: 'joe'})
+    joe = new User({name: 'joe'});
     joe.save()
       .then( () => done() );
   });

@@ -5,7 +5,7 @@ describe("Updating records", () => {
   let joe;
 
   beforeEach( (done) => {
-    joe = new User({name: "Joe"})
+    joe = new User({name: "Joe"});
     joe.save()
       .then( () => done() );
   });
@@ -17,7 +17,7 @@ describe("Updating records", () => {
         assert(users.length === 1);
         assert(users[0].name === 'alex');
         done();
-    });
+      });
   }
 
   it("intance type using set and save", (done) => {
@@ -33,10 +33,10 @@ describe("Updating records", () => {
   });
 
   it("can update postCount by increment", (done) => {
-    User.update({name: "Joe"}, { $inc: { postCount: 5 }})
+    User.update({name: "Joe"}, { $inc: { likes: 5 }})
       .then( () => User.findOne({name: "Joe"}))
       .then( (user) => {
-        assert(user.postCount === 5);
+        assert(user.likes === 5);
         done();
       });
   });
