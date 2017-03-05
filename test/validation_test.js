@@ -16,13 +16,13 @@ describe("Validating records", () => {
     assert(message === "User name must be longer than 2 characters.");
   });
 
-  // it("should return validation promise for improper save", (done) => {
-  //   const user = new User({name: undefined});
-  //   user.save()
-  //     .catch( (validationResult) => {
-  //       const {message} = validationResult.errors.name;
-  //       assert(message === "User name must be longer than 2 characters.")
-  //     });
-  //     done();
-  // });
+  it("disallows impropper records from being saved", (done) => {
+    const user = new User({name: "ae"});
+    user.save()
+      .catch( (validationResult) => {
+        const {message} = validationResult.errors.name;
+        assert(message === "User name must be longer than 2 characters.");
+        done();
+      });
+  });
 });
