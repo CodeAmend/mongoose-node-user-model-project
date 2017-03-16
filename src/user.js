@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-
-const Schema = mongoose.Schema;
 const PostSchema = require('./post_schema');
+const Schema = mongoose.Schema;
 
-const UserSchema = Schema({
+const UserSchema = new Schema({
   name: {
     type:String,
     validate: {
@@ -23,6 +21,14 @@ const UserSchema = Schema({
 
 UserSchema.virtual('postCount').get(function() {
   return this.posts.length;
+});
+
+UserSchema.pre('remove', function(next) {
+  const BlogPost = mongoose.model('blogPost');
+
+
+  BlogPost.remove({ _id: { $in: this.blogPosts } })
+    .then( () => next());
 });
 
 const User = mongoose.model('user', UserSchema);
